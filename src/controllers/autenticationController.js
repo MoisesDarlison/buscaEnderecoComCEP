@@ -1,18 +1,22 @@
 const user = require('../models/userModel.js')
 const jwt = require('jsonwebtoken')
+const bcrypt = require('bcrypt')
 const SECRET = process.env.PASSWORD_USER_SECRET_KEY
 
 module.exports = {
     async create(req, res) {
         try {
-            const {email, password} = req.body
+            const { email, password } = req.body
             const userData = await user.findOne(
                 {
                     where: { email },
                     attributes: ['id', 'password'],
                 });
-
+            if (!userData) {
+                return res.status(401).json({ erro: 'USER NOT FOUND' });
+            }
             const validateUser = bcrypt.compareSync(password, userData.dataValues.password)
+            
             if (!validateUser) {
                 return res.status(401).json({ erro: 'ACCESS DENIED' });
             }
