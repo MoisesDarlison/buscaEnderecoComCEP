@@ -2,7 +2,7 @@ const connection = require("../../config/connection")
 const Sequelize = require('sequelize')
 const bcrypt = require('bcrypt');
 
-const user = connection.define('user', {
+const user = connection.define('users', {
     name: {
         type: Sequelize.STRING,
         allowNull: false,
