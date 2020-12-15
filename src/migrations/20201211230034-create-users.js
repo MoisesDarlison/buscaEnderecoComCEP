@@ -22,6 +22,7 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false,
         isEmail: true,
+        unique: true,
       },
       active: Sequelize.BOOLEAN,
       createdAt: Sequelize.DATE,

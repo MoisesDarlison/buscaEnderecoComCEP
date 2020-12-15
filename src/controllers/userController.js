@@ -12,6 +12,10 @@ module.exports = {
             })
             return res.status(201).json(newUser)
         } catch (error) {
+            const erro = error.errors[0].message
+            if(erro == 'email must be unique'){
+                return res.status(401).json('please insert new email')
+            }
             console.log(error)
             return res.status(500).json(error.massage)
         }

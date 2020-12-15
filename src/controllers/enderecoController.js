@@ -7,7 +7,7 @@ module.exports = {
             const userId = req.userIdJWT
 
             if (!numberHome || !zipCode) {
-                return res.status(200).json('please insert the valid code and house number')
+                return res.status(203).json('please insert the valid code and house number')
             }
             const newAddress = await address.create({
                 userId,
