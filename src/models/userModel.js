@@ -15,12 +15,14 @@ const user = connection.define('users', {
         type: Sequelize.STRING,
         allowNull: false,
         isEmail: true,
+        unique: true,
     },
     active: Sequelize.BOOLEAN,
     createdAt: Sequelize.DATE,
     updatedAt: Sequelize.DATE,
 }, {
     freezeTableName: true,
+    timestamps: true,
     hooks: {
         afterValidate: (user, options) => {
             {

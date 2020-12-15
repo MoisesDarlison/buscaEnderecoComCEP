@@ -6,11 +6,12 @@ module.exports = {
     await queryInterface.createTable('enderecos',
       {
         id: {
-          type: Sequelize.STRING,
+          type: Sequelize.INTEGER,
           allowNull: false,
-          unique: true,
+          autoIncrement: true,
+          primaryKey: true,
         },
-        userID: {
+        userId: {
           type: Sequelize.INTEGER,
           allowNull: false,
           references: {

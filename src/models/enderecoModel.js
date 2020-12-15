@@ -3,11 +3,6 @@ const Sequelize = require('sequelize')
 const user = require('./userModel')
 
 const address = connection.define('enderecos', {
-    id: {
-        type: Sequelize.STRING,
-        allowNull: false,
-        unique: true,
-    },
     zipCode: {
         type: Sequelize.STRING,
         allowNull: false,
@@ -32,9 +27,10 @@ const address = connection.define('enderecos', {
 
 }, {
     freezeTableName: true,
+    timestamps: true,
 })
 user.hasMany(address, {
-    foreignKey: 'userID'
+    foreignKey: 'userId'
 });
 address.belongsTo(user);
 
