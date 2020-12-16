@@ -3,19 +3,14 @@ const address = require('../models/enderecoModel')
 module.exports = {
     async create(req, res) {
         try {
-            const { zipCode, street, numberHome, city, country } = req.body
             const userId = req.userIdJWT
-
-            if (!numberHome || !zipCode) {
-                return res.status(203).json('please insert the valid code and house number')
-            }
             const newAddress = await address.create({
                 userId,
-                zipCode,
-                street,
-                numberHome,
-                city,
-                country,
+                zipCode:req.zipcode,
+                street:req.street,
+                numberHome:req.houseNumber,
+                city:req.city,
+                country:'Brasil',
             })
             return res.status(201).json(newAddress)
         } catch (error) {
