@@ -82,7 +82,7 @@ Ex:
 #### Esta operacao retornara um token(Authorization) que sera utilizado parar acessar as tasks deste usuario
 
 # ADDRESS
-### _Qualquer operação com as tasks será necessário enviar a Authorization por meio de headers_
+### _Para operar com os enderecos será necessário enviar a Authorization por meio de headers_
 
 ## NOVO ENDERECO
 `POST: /address` - Necessário enviar zipcode e houseNumber por meio de JSON pelo Body
