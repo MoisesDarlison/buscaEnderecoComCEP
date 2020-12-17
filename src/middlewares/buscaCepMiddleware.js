@@ -1,29 +1,28 @@
+const axios = require('axios');
 const fetch = require('node-fetch');
 
 module.exports = {
   async buscaCep(req, res, next) {
     const { zipcode, houseNumber } = req.body
     if (!zipcode || zipcode.length != 8 || !houseNumber) {
-      return res.status(203).json('please insert the valid code and houseNumber')
+      return res.status(203).json('Please insert the valid code and houseNumber')
     }
     try {
-      const viacep = await fetch(`https://viacep.com.br/ws/${zipcode}/json/`);
-      const results = await Promise.all([viacep.json()]);
+      const { data } = await axios(`https://viacep.com.br/ws/${zipcode}/json/`)
 
-
-      if(results[0].erro == true){
+      if (data.erro) {
         return res.status(401).json('please insert new zipcode, not localized')
       }
-      
-      req.zipcode = results[0].cep;
-      req.street = results[0].logradouro;
+
+      req.zipcode = data.cep;
+      req.street = data.logradouro;
       req.houseNumber = houseNumber;
-      req.city = results[0].localidade;
+      req.city = data.localidade;
+
     } catch (error) {
       console.log(error)
     }
-
     next()
-    //return res.status(200).json(results)
+
   }
 }
